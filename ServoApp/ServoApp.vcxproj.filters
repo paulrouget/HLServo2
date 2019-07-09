@@ -14,6 +14,7 @@
     <ClCompile Include="logs.cpp" />
     <ClCompile Include="ImmersiveView.cpp" />
     <ClCompile Include="BrowserPage.cpp" />
+    <ClCompile Include="Servo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -21,6 +22,7 @@
     <ClInclude Include="logs.h" />
     <ClInclude Include="ImmersiveView.h" />
     <ClInclude Include="BrowserPage.h" />
+    <ClInclude Include="Servo.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">

@@ -32,3 +32,14 @@
 #include <winrt/Windows.Storage.Streams.h>
 #include <winrt/Windows.UI.Core.h>
 #include <winrt/Windows.UI.Input.Spatial.h>
+
+#define GL_GLEXT_PROTOTYPES
+
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
+
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+#include <EGL/eglplatform.h>
+
+#include <angle_windowsstore.h>
