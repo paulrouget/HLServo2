@@ -21,16 +21,6 @@ namespace winrt::ServoApp::implementation
         InitializeComponent();
     }
 
-    int32_t BrowserPage::MyProperty()
-    {
-        throw hresult_not_implemented();
-    }
-
-    void BrowserPage::MyProperty(int32_t /* value */)
-    {
-        throw hresult_not_implemented();
-    }
-
     void BrowserPage::OnImmersiveButtonClicked(IInspectable const&, RoutedEventArgs const&)
     {
         if (HolographicSpace::IsAvailable())

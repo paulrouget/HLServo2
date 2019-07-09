@@ -4,6 +4,5 @@ namespace ServoApp
     runtimeclass BrowserPage : Windows.UI.Xaml.Controls.Page
     {
         BrowserPage();
-        Int32 MyProperty;
     }
 }
