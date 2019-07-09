@@ -36,7 +36,7 @@ namespace winrt::BlankApp1::implementation
         if (HolographicSpace::IsAvailable())
         {
           log("Holographic space available");
-          auto v = winrt::Windows::ApplicationModel::Core::CoreApplication::CreateNewView(Foobar::AppViewSource());
+          auto v = winrt::Windows::ApplicationModel::Core::CoreApplication::CreateNewView(Foobar::ImmersiveViewSource());
             int parentId = ApplicationView::GetForCurrentView().Id();
             v.Dispatcher().RunAsync(Windows::UI::Core::CoreDispatcherPriority::Low, [parentId]() {
             int winId = ApplicationView::GetForCurrentView().Id();

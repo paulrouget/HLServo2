@@ -22,7 +22,7 @@ using namespace winrt::Windows::UI::Core;
 
 // IFrameworkViewSource methods
 
-IFrameworkView AppViewSource::CreateView()
+IFrameworkView ImmersiveViewSource::CreateView()
 {
     return holographicView;
 }
@@ -31,13 +31,13 @@ IFrameworkView AppViewSource::CreateView()
 
 // The first method called when the IFrameworkView is being created.
 // Use this method to subscribe for Windows shell events and to initialize your app.
-void AppView::Initialize(CoreApplicationView const& applicationView)
+void ImmersiveView::Initialize(CoreApplicationView const& applicationView)
 {
-    applicationView.Activated(std::bind(&AppView::OnViewActivated, this, _1, _2));
+    applicationView.Activated(std::bind(&ImmersiveView::OnViewActivated, this, _1, _2));
 
     // Register event handlers for app lifecycle.
-    m_suspendingEventToken = CoreApplication::Suspending(bind(&AppView::OnSuspending, this, _1, _2));
-    m_resumingEventToken = CoreApplication::Resuming(bind(&AppView::OnResuming, this, _1, _2));
+    m_suspendingEventToken = CoreApplication::Suspending(bind(&ImmersiveView::OnSuspending, this, _1, _2));
+    m_resumingEventToken = CoreApplication::Resuming(bind(&ImmersiveView::OnResuming, this, _1, _2));
 
     // At this point we have access to the device and we can create device-dependent
     // resources.
@@ -47,19 +47,19 @@ void AppView::Initialize(CoreApplicationView const& applicationView)
 }
 
 // Called when the CoreWindow object is created (or re-created).
-void AppView::SetWindow(CoreWindow const& window)
+void ImmersiveView::SetWindow(CoreWindow const& window)
 {
     // Register for keypress notifications.
-    m_keyDownEventToken = window.KeyDown(bind(&AppView::OnKeyPressed, this, _1, _2));
+    m_keyDownEventToken = window.KeyDown(bind(&ImmersiveView::OnKeyPressed, this, _1, _2));
 
     // Register for pointer pressed notifications.
-    m_pointerPressedEventToken = window.PointerPressed(bind(&AppView::OnPointerPressed, this, _1, _2));
+    m_pointerPressedEventToken = window.PointerPressed(bind(&ImmersiveView::OnPointerPressed, this, _1, _2));
 
     // Register for notification that the app window is being closed.
-    m_windowClosedEventToken = window.Closed(bind(&AppView::OnWindowClosed, this, _1, _2));
+    m_windowClosedEventToken = window.Closed(bind(&ImmersiveView::OnWindowClosed, this, _1, _2));
 
     // Register for notifications that the app window is losing focus.
-    m_visibilityChangedEventToken = window.VisibilityChanged(bind(&AppView::OnVisibilityChanged, this, _1, _2));
+    m_visibilityChangedEventToken = window.VisibilityChanged(bind(&ImmersiveView::OnVisibilityChanged, this, _1, _2));
 
     // Create a holographic space for the core window for the current view.
     // Presenting holographic frames that are created by this holographic space will put
@@ -78,13 +78,13 @@ void AppView::SetWindow(CoreWindow const& window)
 
 // The Load method can be used to initialize scene resources or to load a
 // previously saved app state.
-void AppView::Load(winrt::hstring const& entryPoint)
+void ImmersiveView::Load(winrt::hstring const& entryPoint)
 {
 }
 
 // This method is called after the window becomes active. It oversees the
 // update, draw, and present loop, and it also oversees window message processing.
-void AppView::Run()
+void ImmersiveView::Run()
 {
     while (!m_windowClosed)
     {
@@ -111,7 +111,7 @@ void AppView::Run()
 
 // Terminate events do not cause Uninitialize to be called. It will be called if your IFrameworkView
 // class is torn down while the app is in the foreground, for example if the Run method exits.
-void AppView::Uninitialize()
+void ImmersiveView::Uninitialize()
 {
     // FIXME: m_main.reset();
     // FIXME: m_deviceResources.reset();
@@ -131,7 +131,7 @@ void AppView::Uninitialize()
 
 // Called when the app is prelaunched. Use this method to load resources ahead of time
 // and enable faster launch times.
-void AppView::OnLaunched(LaunchActivatedEventArgs const& args)
+void ImmersiveView::OnLaunched(LaunchActivatedEventArgs const& args)
 {
     if (args.PrelaunchActivated())
     {
@@ -142,13 +142,13 @@ void AppView::OnLaunched(LaunchActivatedEventArgs const& args)
 }
 
 // Called when the app view is activated. Activates the app's CoreWindow.
-void AppView::OnViewActivated(CoreApplicationView const& sender, IActivatedEventArgs const& args)
+void ImmersiveView::OnViewActivated(CoreApplicationView const& sender, IActivatedEventArgs const& args)
 {
     // Run() won't start until the CoreWindow is activated.
     sender.CoreWindow().Activate();
 }
 
-void AppView::OnSuspending(winrt::Windows::Foundation::IInspectable const& sender, SuspendingEventArgs const& args)
+void ImmersiveView::OnSuspending(winrt::Windows::Foundation::IInspectable const& sender, SuspendingEventArgs const& args)
 {
     // Save app state asynchronously after requesting a deferral. Holding a deferral
     // indicates that the application is busy performing suspending operations. Be
@@ -174,7 +174,7 @@ void AppView::OnSuspending(winrt::Windows::Foundation::IInspectable const& sende
     });
 }
 
-void AppView::OnResuming(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::Foundation::IInspectable const& args)
+void ImmersiveView::OnResuming(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::Foundation::IInspectable const& args)
 {
     // Restore any data or state that was unloaded on suspend. By default, data
     // and state are persisted when resuming from suspend. Note that this event
@@ -194,12 +194,12 @@ void AppView::OnResuming(winrt::Windows::Foundation::IInspectable const& sender,
 
 // Window event handlers
 
-void AppView::OnVisibilityChanged(CoreWindow const& sender, VisibilityChangedEventArgs const& args)
+void ImmersiveView::OnVisibilityChanged(CoreWindow const& sender, VisibilityChangedEventArgs const& args)
 {
     m_windowVisible = args.Visible();
 }
 
-void AppView::OnWindowClosed(CoreWindow const& sender, CoreWindowEventArgs const& args)
+void ImmersiveView::OnWindowClosed(CoreWindow const& sender, CoreWindowEventArgs const& args)
 {
     m_windowClosed = true;
 }
@@ -207,7 +207,7 @@ void AppView::OnWindowClosed(CoreWindow const& sender, CoreWindowEventArgs const
 
 // Input event handlers
 
-void AppView::OnKeyPressed(CoreWindow const& sender, KeyEventArgs const& args)
+void ImmersiveView::OnKeyPressed(CoreWindow const& sender, KeyEventArgs const& args)
 {
     //
     // TODO: Bluetooth keyboards are supported by HoloLens. You can use this method for
@@ -216,7 +216,7 @@ void AppView::OnKeyPressed(CoreWindow const& sender, KeyEventArgs const& args)
     //
 }
 
-void AppView::OnPointerPressed(CoreWindow const& sender, PointerEventArgs const& args)
+void ImmersiveView::OnPointerPressed(CoreWindow const& sender, PointerEventArgs const& args)
 {
     // Allow the user to interact with the holographic world using the mouse.
     //FIXME:
