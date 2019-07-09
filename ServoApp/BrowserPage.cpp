@@ -36,7 +36,7 @@ namespace winrt::ServoApp::implementation
         if (HolographicSpace::IsAvailable())
         {
           log("Holographic space available");
-          auto v = winrt::Windows::ApplicationModel::Core::CoreApplication::CreateNewView(Foobar::ImmersiveViewSource());
+          auto v = winrt::Windows::ApplicationModel::Core::CoreApplication::CreateNewView(ServoApp::ImmersiveViewSource());
             int parentId = ApplicationView::GetForCurrentView().Id();
             v.Dispatcher().RunAsync(Windows::UI::Core::CoreDispatcherPriority::Low, [parentId]() {
             int winId = ApplicationView::GetForCurrentView().Id();

@@ -3,7 +3,7 @@
 // FIXME: #include "Common/DeviceResources.h"
 // FIXME: #include "HolographicApp1Main.h"
 
-namespace Foobar
+namespace winrt::ServoApp
 {
     // IFrameworkView class. Connects the app with the Windows shell and handles application lifecycle events.
     class ImmersiveView sealed : public winrt::implements<ImmersiveView, winrt::Windows::ApplicationModel::Core::IFrameworkView>

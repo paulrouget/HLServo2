@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
 #include "ImmersiveView.h"
 
-using namespace Foobar;
+using namespace winrt::ServoApp;
 
 using namespace concurrency;
 using namespace std::placeholders;
