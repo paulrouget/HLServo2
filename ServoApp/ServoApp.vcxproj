@@ -123,6 +123,7 @@
   <ItemGroup>
     <ClInclude Include="ImmersiveView.h" />
     <ClInclude Include="logs.h" />
+    <ClInclude Include="OpenGLES.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.h">
       <DependentUpon>App.xaml</DependentUpon>
@@ -319,6 +320,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImmersiveView.cpp" />
+    <ClCompile Include="OpenGLES.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

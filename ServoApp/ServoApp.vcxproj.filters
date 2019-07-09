@@ -15,6 +15,7 @@
     <ClCompile Include="ImmersiveView.cpp" />
     <ClCompile Include="BrowserPage.cpp" />
     <ClCompile Include="Servo.cpp" />
+    <ClCompile Include="OpenGLES.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -23,6 +24,7 @@
     <ClInclude Include="ImmersiveView.h" />
     <ClInclude Include="BrowserPage.h" />
     <ClInclude Include="Servo.h" />
+    <ClInclude Include="OpenGLES.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">

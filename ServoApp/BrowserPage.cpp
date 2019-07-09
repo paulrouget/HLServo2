@@ -31,7 +31,7 @@ namespace winrt::ServoApp::implementation
         throw hresult_not_implemented();
     }
 
-    void BrowserPage::ClickHandler(IInspectable const&, RoutedEventArgs const&)
+    void BrowserPage::OnImmersiveButtonClicked(IInspectable const&, RoutedEventArgs const&)
     {
         if (HolographicSpace::IsAvailable())
         {
