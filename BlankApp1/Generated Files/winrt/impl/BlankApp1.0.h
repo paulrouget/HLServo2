@@ -8,17 +8,17 @@ namespace winrt::Windows::UI::Xaml::Markup
 }
 namespace winrt::BlankApp1
 {
-    struct IMainPage;
-    struct MainPage;
+    struct IBrowserPage;
+    struct BrowserPage;
     struct XamlMetaDataProvider;
 }
 namespace winrt::impl
 {
-    template <> struct category<BlankApp1::IMainPage>
+    template <> struct category<BlankApp1::IBrowserPage>
     {
         using type = interface_category;
     };
-    template <> struct category<BlankApp1::MainPage>
+    template <> struct category<BlankApp1::BrowserPage>
     {
         using type = class_category;
     };
@@ -26,31 +26,31 @@ namespace winrt::impl
     {
         using type = class_category;
     };
-    template <> struct name<BlankApp1::IMainPage>
+    template <> struct name<BlankApp1::IBrowserPage>
     {
-        static constexpr auto & value{ L"BlankApp1.IMainPage" };
+        static constexpr auto & value{ L"BlankApp1.IBrowserPage" };
     };
-    template <> struct name<BlankApp1::MainPage>
+    template <> struct name<BlankApp1::BrowserPage>
     {
-        static constexpr auto & value{ L"BlankApp1.MainPage" };
+        static constexpr auto & value{ L"BlankApp1.BrowserPage" };
     };
     template <> struct name<BlankApp1::XamlMetaDataProvider>
     {
         static constexpr auto & value{ L"BlankApp1.XamlMetaDataProvider" };
     };
-    template <> struct guid_storage<BlankApp1::IMainPage>
+    template <> struct guid_storage<BlankApp1::IBrowserPage>
     {
-        static constexpr guid value{ 0x3B6FC83D,0xB73D,0x56CF,{ 0x84,0xF2,0xF3,0x3D,0x93,0xFF,0x8B,0x28 } };
+        static constexpr guid value{ 0xCEACB610,0x5872,0x540D,{ 0xAE,0xD6,0x8C,0x06,0xE8,0x48,0x3F,0x6E } };
     };
-    template <> struct default_interface<BlankApp1::MainPage>
+    template <> struct default_interface<BlankApp1::BrowserPage>
     {
-        using type = BlankApp1::IMainPage;
+        using type = BlankApp1::IBrowserPage;
     };
     template <> struct default_interface<BlankApp1::XamlMetaDataProvider>
     {
         using type = Windows::UI::Xaml::Markup::IXamlMetadataProvider;
     };
-    template <> struct abi<BlankApp1::IMainPage>
+    template <> struct abi<BlankApp1::IBrowserPage>
     {
         struct __declspec(novtable) type : inspectable_abi
         {
@@ -59,14 +59,14 @@ namespace winrt::impl
         };
     };
     template <typename D>
-    struct consume_BlankApp1_IMainPage
+    struct consume_BlankApp1_IBrowserPage
     {
         [[nodiscard]] auto MyProperty() const;
         auto MyProperty(int32_t value) const;
     };
-    template <> struct consume<BlankApp1::IMainPage>
+    template <> struct consume<BlankApp1::IBrowserPage>
     {
-        template <typename D> using type = consume_BlankApp1_IMainPage<D>;
+        template <typename D> using type = consume_BlankApp1_IBrowserPage<D>;
     };
 }
 #endif

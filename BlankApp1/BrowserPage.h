@@ -1,12 +1,12 @@
 ﻿#pragma once
 
-#include "MainPage.g.h"
+#include "BrowserPage.g.h"
 
 namespace winrt::BlankApp1::implementation
 {
-    struct MainPage : MainPageT<MainPage>
+    struct BrowserPage : BrowserPageT<BrowserPage>
     {
-        MainPage();
+        BrowserPage();
 
         int32_t MyProperty();
         void MyProperty(int32_t value);
@@ -17,7 +17,7 @@ namespace winrt::BlankApp1::implementation
 
 namespace winrt::BlankApp1::factory_implementation
 {
-    struct MainPage : MainPageT<MainPage, implementation::MainPage>
+    struct BrowserPage : BrowserPageT<BrowserPage, implementation::BrowserPage>
     {
     };
 }

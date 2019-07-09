@@ -12,14 +12,14 @@ namespace winrt::BlankApp1::implementation
     using IInspectable = ::winrt::Windows::Foundation::IInspectable;
 
     template <typename D, typename ... I>
-    struct MainPageT : public ::winrt::BlankApp1::implementation::MainPage_base<D,
+    struct BrowserPageT : public ::winrt::BlankApp1::implementation::BrowserPage_base<D,
         ::winrt::Windows::UI::Xaml::Markup::IComponentConnector,
         ::winrt::Windows::UI::Xaml::Markup::IComponentConnector2,
         I...>
     {
-        using base_type = typename MainPageT::base_type;
+        using base_type = typename BrowserPageT::base_type;
         using base_type::base_type;
-        using class_type = typename MainPageT::class_type;
+        using class_type = typename BrowserPageT::class_type;
 
         void InitializeComponent();
         void Connect(int32_t connectionId, IInspectable const& target);
@@ -40,7 +40,7 @@ namespace winrt::BlankApp1::implementation
         bool _contentLoaded{false};
 
     private:
-        struct MainPage_obj1_Bindings;
+        struct BrowserPage_obj1_Bindings;
 
         ::winrt::Windows::UI::Xaml::Controls::Button _myButton{nullptr};
     };

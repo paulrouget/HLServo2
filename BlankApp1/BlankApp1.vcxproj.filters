@@ -4,26 +4,23 @@
     <ApplicationDefinition Include="App.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MainPage.xaml" />
-  </ItemGroup>
-  <ItemGroup>
     <Midl Include="App.idl" />
-    <Midl Include="MainPage.idl" />
+    <Midl Include="BrowserPage.idl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="MainPage.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="logs.cpp" />
     <ClCompile Include="ImmersiveView.cpp" />
+    <ClCompile Include="BrowserPage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.h" />
-    <ClInclude Include="MainPage.h" />
     <ClInclude Include="logs.h" />
     <ClInclude Include="ImmersiveView.h" />
+    <ClInclude Include="BrowserPage.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
@@ -62,5 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PropertySheet.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="BrowserPage.xaml" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
 #include "logs.h"
-#include "MainPage.h"
-#include "MainPage.g.cpp"
+#include "BrowserPage.h"
+#include "BrowserPage.g.cpp"
 #include "ImmersiveView.h"
 
 // FIXME: necessary for ApplicationView::GetForCurrentView() to work.
@@ -16,22 +16,22 @@ using namespace Windows::Graphics::Holographic;
 
 namespace winrt::BlankApp1::implementation
 {
-    MainPage::MainPage()
+    BrowserPage::BrowserPage()
     {
         InitializeComponent();
     }
 
-    int32_t MainPage::MyProperty()
+    int32_t BrowserPage::MyProperty()
     {
         throw hresult_not_implemented();
     }
 
-    void MainPage::MyProperty(int32_t /* value */)
+    void BrowserPage::MyProperty(int32_t /* value */)
     {
         throw hresult_not_implemented();
     }
 
-    void MainPage::ClickHandler(IInspectable const&, RoutedEventArgs const&)
+    void BrowserPage::ClickHandler(IInspectable const&, RoutedEventArgs const&)
     {
         if (HolographicSpace::IsAvailable())
         {

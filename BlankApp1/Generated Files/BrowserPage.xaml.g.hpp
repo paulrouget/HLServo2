@@ -5,7 +5,7 @@
 //     the code is regenerated.
 //------------------------------------------------------------------------------
 #include "pch.h"
-#include "MainPage.h"
+#include "BrowserPage.h"
 
 #pragma warning(push)
 #pragma warning(disable: 4100) // unreferenced formal parameter
@@ -22,18 +22,18 @@ namespace winrt::BlankApp1::implementation
     using XamlBindingHelper = ::winrt::Windows::UI::Xaml::Markup::XamlBindingHelper;
 
     template <typename D, typename ... I>
-    void MainPageT<D, I...>::InitializeComponent()
+    void BrowserPageT<D, I...>::InitializeComponent()
     {
         if (!_contentLoaded)
         {
             _contentLoaded = true;
-            Uri resourceLocator{ L"ms-appx:///MainPage.xaml" };
+            Uri resourceLocator{ L"ms-appx:///BrowserPage.xaml" };
             Application::LoadComponent(*this, resourceLocator, ComponentResourceLocation::Application);
         }
     }
 
     template <typename D, typename ... I>
-    void MainPageT<D, I...>::Connect(int32_t connectionId, IInspectable const& target)
+    void BrowserPageT<D, I...>::Connect(int32_t connectionId, IInspectable const& target)
     {
         switch (connectionId)
         {
@@ -55,25 +55,25 @@ namespace winrt::BlankApp1::implementation
     }
 
     template <typename D, typename ... I>
-    void MainPageT<D, I...>::DisconnectUnloadedObject(int32_t)
+    void BrowserPageT<D, I...>::DisconnectUnloadedObject(int32_t)
     {
         throw ::winrt::hresult_invalid_argument { L"No unloadable objects to disconnect." };
     }
 
     template <typename D, typename ... I>
-    void MainPageT<D, I...>::UnloadObject(DependencyObject const&)
+    void BrowserPageT<D, I...>::UnloadObject(DependencyObject const&)
     {
         throw ::winrt::hresult_invalid_argument { L"No unloadable objects." };
     }
 
 
     template <typename D, typename... I>
-    IComponentConnector MainPageT<D, I...>::GetBindingConnector(int32_t, IInspectable const&)
+    IComponentConnector BrowserPageT<D, I...>::GetBindingConnector(int32_t, IInspectable const&)
     {
         return nullptr;
     }
 
-    template struct MainPageT<struct MainPage>;
+    template struct BrowserPageT<struct BrowserPage>;
 }
 
 

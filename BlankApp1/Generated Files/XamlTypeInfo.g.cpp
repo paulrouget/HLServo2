@@ -12,10 +12,10 @@
 #include "XamlTypeInfo.xaml.g.h"
 
 #include "App.h"
-#include "MainPage.h"
+#include "BrowserPage.h"
 #include "XamlBindingInfo.xaml.g.hpp"
 #include "App.xaml.g.hpp"
-#include "MainPage.xaml.g.hpp"
+#include "BrowserPage.xaml.g.hpp"
 
 namespace winrt::BlankApp1::implementation
 {
@@ -110,8 +110,8 @@ const TypeInfo TypeInfos[] =
     0, 0, -1, TypeKind::Metadata,
     TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
     //   1
-    L"BlankApp1.MainPage", L"",
-    &ActivateLocalType<::winrt::BlankApp1::implementation::MainPage>, nullptr, nullptr, nullptr,
+    L"BlankApp1.BrowserPage", L"",
+    &ActivateLocalType<::winrt::BlankApp1::implementation::BrowserPage>, nullptr, nullptr, nullptr,
     2, // Windows.UI.Xaml.Controls.Page
     0, 0, -1, TypeKind::Custom,
     TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
@@ -155,9 +155,9 @@ constexpr uint32_t TypeInfoLookup[] = {
       1,   //  16
       1,   //  17
       1,   //  18
-      2,   //  19
-      2,   //  20
-      2,   //  21
+      1,   //  19
+      1,   //  20
+      1,   //  21
       2,   //  22
       2,   //  23
       2,   //  24
@@ -190,10 +190,10 @@ struct MemberInfo
 
 const MemberInfo MemberInfos[] = 
 {
-    //   0 - BlankApp1.MainPage.MyProperty
+    //   0 - BlankApp1.BrowserPage.MyProperty
     L"MyProperty",
-    &GetValueTypeMember_MyProperty<::winrt::BlankApp1::MainPage, int32_t>,
-    &SetValueTypeMember_MyProperty<::winrt::BlankApp1::MainPage, int32_t>,
+    &GetValueTypeMember_MyProperty<::winrt::BlankApp1::BrowserPage, int32_t>,
+    &SetValueTypeMember_MyProperty<::winrt::BlankApp1::BrowserPage, int32_t>,
     0, // Int32
     -1,
     false, false, false,

@@ -11,18 +11,18 @@ static_assert(winrt::check_version(CPPWINRT_VERSION, "2.0.190620.2"), "Mismatche
 #include "winrt/impl/BlankApp1.2.h"
 namespace winrt::impl
 {
-    template <typename D> auto consume_BlankApp1_IMainPage<D>::MyProperty() const
+    template <typename D> auto consume_BlankApp1_IBrowserPage<D>::MyProperty() const
     {
         int32_t value;
-        check_hresult(WINRT_IMPL_SHIM(BlankApp1::IMainPage)->get_MyProperty(&value));
+        check_hresult(WINRT_IMPL_SHIM(BlankApp1::IBrowserPage)->get_MyProperty(&value));
         return value;
     }
-    template <typename D> auto consume_BlankApp1_IMainPage<D>::MyProperty(int32_t value) const
+    template <typename D> auto consume_BlankApp1_IBrowserPage<D>::MyProperty(int32_t value) const
     {
-        check_hresult(WINRT_IMPL_SHIM(BlankApp1::IMainPage)->put_MyProperty(value));
+        check_hresult(WINRT_IMPL_SHIM(BlankApp1::IBrowserPage)->put_MyProperty(value));
     }
     template <typename D>
-    struct produce<D, BlankApp1::IMainPage> : produce_base<D, BlankApp1::IMainPage>
+    struct produce<D, BlankApp1::IBrowserPage> : produce_base<D, BlankApp1::IBrowserPage>
     {
         int32_t __stdcall get_MyProperty(int32_t* value) noexcept final try
         {
@@ -45,8 +45,8 @@ namespace winrt::BlankApp1
 }
 namespace std
 {
-    template<> struct hash<winrt::BlankApp1::IMainPage> : winrt::impl::hash_base<winrt::BlankApp1::IMainPage> {};
-    template<> struct hash<winrt::BlankApp1::MainPage> : winrt::impl::hash_base<winrt::BlankApp1::MainPage> {};
+    template<> struct hash<winrt::BlankApp1::IBrowserPage> : winrt::impl::hash_base<winrt::BlankApp1::IBrowserPage> {};
+    template<> struct hash<winrt::BlankApp1::BrowserPage> : winrt::impl::hash_base<winrt::BlankApp1::BrowserPage> {};
     template<> struct hash<winrt::BlankApp1::XamlMetaDataProvider> : winrt::impl::hash_base<winrt::BlankApp1::XamlMetaDataProvider> {};
 }
 #endif
