@@ -5,8 +5,8 @@
     <CppWinRTOptimized>true</CppWinRTOptimized>
     <MinimalCoreWin>true</MinimalCoreWin>
     <ProjectGuid>{0eab7d8b-97fd-4c92-8bb2-d5691b3d5abd}</ProjectGuid>
-    <ProjectName>BlankApp1</ProjectName>
-    <RootNamespace>BlankApp1</RootNamespace>
+    <ProjectName>ServoApp</ProjectName>
+    <RootNamespace>ServoApp</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
@@ -69,7 +69,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <PackageCertificateKeyFile>BlankApp1_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>ServoApp_TemporaryKey.pfx</PackageCertificateKeyFile>
     <PackageCertificateThumbprint>1132EA939A7107B303D4D40ED6CE28778FC96409</PackageCertificateThumbprint>
   </PropertyGroup>
   <ItemDefinitionGroup>
@@ -117,7 +117,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="BlankApp1_TemporaryKey.pfx" />
+    <None Include="ServoApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png" />

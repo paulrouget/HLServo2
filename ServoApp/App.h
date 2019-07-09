@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "App.xaml.g.h"
 
-namespace winrt::BlankApp1::implementation
+namespace winrt::ServoApp::implementation
 {
     struct App : AppT<App>
     {

@@ -14,7 +14,7 @@ using namespace Windows::UI::ViewManagement;
 using namespace Windows::Foundation;
 using namespace Windows::Graphics::Holographic;
 
-namespace winrt::BlankApp1::implementation
+namespace winrt::ServoApp::implementation
 {
     BrowserPage::BrowserPage()
     {

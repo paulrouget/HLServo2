@@ -1,4 +1,4 @@
-namespace BlankApp1
+namespace ServoApp
 {
     [default_interface]
     runtimeclass BrowserPage : Windows.UI.Xaml.Controls.Page

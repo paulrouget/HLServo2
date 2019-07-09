@@ -6,7 +6,7 @@
     Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="1d265729-8836-4bd3-9992-4cb111d1068b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
   <Properties>
-    <DisplayName>BlankApp1</DisplayName>
+    <DisplayName>ServoApp</DisplayName>
     <PublisherDisplayName>paul</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -17,8 +17,8 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="BlankApp1.App">
-      <uap:VisualElements DisplayName="BlankApp1" Description="Project for a single page C++/WinRT Universal Windows Platform (UWP) app with no predefined layout"
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="ServoApp.App">
+      <uap:VisualElements DisplayName="ServoApp" Description="Project for a single page C++/WinRT Universal Windows Platform (UWP) app with no predefined layout"
         Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
         </uap:DefaultTile>

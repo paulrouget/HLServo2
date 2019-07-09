@@ -2,7 +2,7 @@
 
 #include "BrowserPage.g.h"
 
-namespace winrt::BlankApp1::implementation
+namespace winrt::ServoApp::implementation
 {
     struct BrowserPage : BrowserPageT<BrowserPage>
     {
@@ -15,7 +15,7 @@ namespace winrt::BlankApp1::implementation
     };
 }
 
-namespace winrt::BlankApp1::factory_implementation
+namespace winrt::ServoApp::factory_implementation
 {
     struct BrowserPage : BrowserPageT<BrowserPage, implementation::BrowserPage>
     {
