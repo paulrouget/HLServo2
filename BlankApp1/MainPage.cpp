@@ -2,7 +2,7 @@
 #include "logs.h"
 #include "MainPage.h"
 #include "MainPage.g.cpp"
-#include "AppView.h"
+#include "ImmersiveView.h"
 
 // FIXME: necessary for ApplicationView::GetForCurrentView() to work.
 // https://devblogs.microsoft.com/oldnewthing/20190530-00/?p=102529

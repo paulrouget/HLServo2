@@ -15,15 +15,15 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="MainPage.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
-    <ClCompile Include="AppView.cpp" />
     <ClCompile Include="logs.cpp" />
+    <ClCompile Include="ImmersiveView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="MainPage.h" />
-    <ClInclude Include="AppView.h" />
     <ClInclude Include="logs.h" />
+    <ClInclude Include="ImmersiveView.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">

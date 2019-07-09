@@ -95,7 +95,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AppView.h" />
+    <ClInclude Include="ImmersiveView.h" />
     <ClInclude Include="logs.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.h">
@@ -129,7 +129,7 @@
     <Image Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AppView.cpp" />
+    <ClCompile Include="ImmersiveView.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

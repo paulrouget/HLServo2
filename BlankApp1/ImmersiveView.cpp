@@ -1,5 +1,5 @@
 ﻿#include "pch.h"
-#include "AppView.h"
+#include "ImmersiveView.h"
 
 using namespace Foobar;
 
@@ -11,14 +11,6 @@ using namespace winrt::Windows::ApplicationModel::Core;
 using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Graphics::Holographic;
 using namespace winrt::Windows::UI::Core;
-
-//// The main function bootstraps into the IFrameworkView.
-//int __stdcall wWinMain(HINSTANCE, HINSTANCE, PWSTR, int)
-//{
-//    winrt::init_apartment();
-//    CoreApplication::Run(AppViewSource());
-//    return 0;
-//}
 
 // IFrameworkViewSource methods
 
