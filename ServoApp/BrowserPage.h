@@ -11,6 +11,7 @@ namespace winrt::ServoApp::implementation
         BrowserPage();
 
         void OnImmersiveButtonClicked(Windows::Foundation::IInspectable const&, Windows::UI::Xaml::RoutedEventArgs const&);
+
         void OnVisibilityChanged(bool);
         void OnPageLoaded();
 
@@ -23,11 +24,11 @@ namespace winrt::ServoApp::implementation
         Windows::Foundation::IAsyncAction Loop();
         Windows::Foundation::IAsyncAction mRenderLoop;
 
-        EGLSurface mRenderSurface;
+        EGLSurface mRenderSurface{ EGL_NO_SURFACE };
         Servo* mServo;
 
         // FIXME: move to App.cpp? Pass as arg to BrowserPage ctor?
-        static OpenGLES mOpenGLES;
+        OpenGLES mOpenGLES;
     };
 }
 

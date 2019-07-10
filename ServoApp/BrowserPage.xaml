@@ -24,7 +24,7 @@
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
       <TextBox Grid.Column="0" Text="url"/>
-      <Button Grid.Column="1" x:Name="immersiveButton" Click="OnImmersiveButtonClicked">Run Immersive</Button>
+      <!--<Button Grid.Column="1" x:Name="immersiveButton" Click="OnImmersiveButtonClicked">Run Immersive</Button>-->
     </Grid>
     <SwapChainPanel Grid.Row="1" x:Name="swapChainPanel">
     </SwapChainPanel>

@@ -25,18 +25,19 @@ namespace winrt::ServoApp::implementation
     {
       InitializeComponent();
       auto window = Window::Current().CoreWindow();
+      log("BrowserPage::BrowserPage()");
 
-      // FIXME:
-      //window.VisibilityChanged([this](CoreWindow const& sender, VisibilityChangedEventArgs const& args) {
-      //  OnVisibilityChanged(args.Visible());
-      //});
-      Loaded([this]() {
-        OnPageLoaded();
+      window.VisibilityChanged([this](CoreWindow const& sender, VisibilityChangedEventArgs const& args) {
+        // OnVisibilityChanged(args.Visible());
+      });
+      Loaded([this](IInspectable const&, RoutedEventArgs const& args) {
+        // OnPageLoaded();
       });
     }
 
     void BrowserPage::OnPageLoaded()
     {
+      log("BrowserPage::OnPageLoaded()");
       CreateRenderSurface();
       StartRenderLoop();
     }
@@ -136,6 +137,8 @@ namespace winrt::ServoApp::implementation
         }
         mServo->PerformUpdates();
       }
+
+      co_return;
     }
 
     void BrowserPage::StartRenderLoop()

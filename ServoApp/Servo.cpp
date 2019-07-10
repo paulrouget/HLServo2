@@ -3,9 +3,9 @@
 
 void on_load_started() {}
 void on_load_ended() {}
-void on_title_changed(const char* title) {}
-void on_url_changed(const char* url) {}
-void on_history_changed(bool back, bool fwd) {}
+void on_title_changed(const char*) {}
+void on_url_changed(const char*) {}
+void on_history_changed(bool, bool) {}
 void on_shutdown_complete() {}
 
 std::function<void()> Servo::sFlush = [](){};

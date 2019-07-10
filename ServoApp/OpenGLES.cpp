@@ -3,6 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 #include "pch.h"
+#include "logs.h"
 #include "OpenGLES.h"
 
 using namespace winrt::Windows::UI::Xaml::Controls;
@@ -14,6 +15,7 @@ OpenGLES::OpenGLES()
     , mEglDisplay(EGL_NO_DISPLAY)
     , mEglContext(EGL_NO_CONTEXT)
 {
+    log("OpenGLES::OpenGLES()");
     Initialize();
 }
 
@@ -188,7 +190,7 @@ EGLSurface OpenGLES::CreateSurface(SwapChainPanel const& panel)
     };
 
     PropertySet surfaceCreationProperties;
-    surfaceCreationProperties.Insert(EGLNativeWindowTypeProperty, panel);
+    surfaceCreationProperties.Insert(L"EGLNativeWindowTypeProperty", panel);
     EGLNativeWindowType win = reinterpret_cast<EGLNativeWindowType>(&surfaceCreationProperties);
 
     // How to set size and or scale:
