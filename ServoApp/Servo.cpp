@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "Servo.h"
 
-using namespace hlservo;
-
 void on_load_started() {}
 void on_load_ended() {}
 void on_title_changed(const char* title) {}

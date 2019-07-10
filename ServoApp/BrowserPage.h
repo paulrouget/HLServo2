@@ -1,6 +1,8 @@
 ﻿#pragma once
 
 #include "BrowserPage.g.h"
+#include "OpenGLES.h"
+#include "Servo.h"
 
 namespace winrt::ServoApp::implementation
 {
@@ -8,7 +10,24 @@ namespace winrt::ServoApp::implementation
     {
         BrowserPage();
 
-        void OnImmersiveButtonClicked(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
+        void OnImmersiveButtonClicked(Windows::Foundation::IInspectable const&, Windows::UI::Xaml::RoutedEventArgs const&);
+        void OnVisibilityChanged(bool);
+        void OnPageLoaded();
+
+        void CreateRenderSurface();
+        void DestroyRenderSurface();
+        void RecoverFromLostDevice();
+
+        void StartRenderLoop();
+        void StopRenderLoop();
+        Windows::Foundation::IAsyncAction Loop();
+        Windows::Foundation::IAsyncAction mRenderLoop;
+
+        EGLSurface mRenderSurface;
+        Servo* mServo;
+
+        // FIXME: move to App.cpp? Pass as arg to BrowserPage ctor?
+        static OpenGLES mOpenGLES;
     };
 }
 

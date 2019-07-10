@@ -11,7 +11,6 @@ extern "C" {
 }
 
 
-namespace hlservo {
 class Servo {
 public:
     Servo(GLsizei width, GLsizei height);
@@ -33,4 +32,3 @@ private:
     GLsizei mWindowHeight;
     bool mAnimating;
 };
-}
