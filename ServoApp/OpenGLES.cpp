@@ -190,16 +190,15 @@ EGLSurface OpenGLES::CreateSurface(SwapChainPanel const& panel)
     };
 
     PropertySet surfaceCreationProperties;
-    surfaceCreationProperties.Insert(L"EGLNativeWindowTypeProperty", panel);
-    EGLNativeWindowType win = reinterpret_cast<EGLNativeWindowType>(&surfaceCreationProperties);
 
+    surfaceCreationProperties.Insert(EGLNativeWindowTypeProperty, panel);
     // How to set size and or scale:
-    // surfaceCreationProperties->Insert(ref new String(EGLRenderSurfaceSizeProperty),
-    //  PropertyValue::CreateSize(*renderSurfaceSize));
-    // surfaceCreationProperties->Insert(ref new String(EGLRenderResolutionScaleProperty),
-    //  PropertyValue::CreateSingle(*resolutionScale));
+    // Insert(EGLRenderSurfaceSizeProperty), PropertyValue::CreateSize(*renderSurfaceSize));
+    // Insert(EGLRenderResolutionScaleProperty), PropertyValue::CreateSingle(*resolutionScale));
 
+    EGLNativeWindowType win = static_cast<EGLNativeWindowType>(winrt::get_abi(surfaceCreationProperties));
     surface = eglCreateWindowSurface(mEglDisplay, mEglConfig, win, surfaceAttributes);
+
     if (surface == EGL_NO_SURFACE) {
         throw winrt::hresult_error(E_FAIL, L"Failed to create EGL surface");
     }

@@ -21,8 +21,11 @@ namespace winrt::ServoApp::implementation
 
         void StartRenderLoop();
         void StopRenderLoop();
-        Windows::Foundation::IAsyncAction Loop();
-        Windows::Foundation::IAsyncAction mRenderLoop;
+        void Loop(Concurrency::cancellation_token);
+        bool IsLoopRunning();
+
+        Concurrency::cancellation_token_source mLoopCancel;
+        std::optional<Concurrency::task<void>> mLoopTask{};
 
         EGLSurface mRenderSurface{ EGL_NO_SURFACE };
         Servo* mServo;

@@ -24,14 +24,13 @@ namespace winrt::ServoApp::implementation
     BrowserPage::BrowserPage()
     {
       InitializeComponent();
-      auto window = Window::Current().CoreWindow();
       log("BrowserPage::BrowserPage()");
-
-      window.VisibilityChanged([this](CoreWindow const& sender, VisibilityChangedEventArgs const& args) {
-        // OnVisibilityChanged(args.Visible());
-      });
-      Loaded([this](IInspectable const&, RoutedEventArgs const& args) {
-        // OnPageLoaded();
+      Loaded([this](IInspectable const&, RoutedEventArgs const&) {
+        OnPageLoaded();
+        auto window = Window::Current().CoreWindow();
+        window.VisibilityChanged([this](CoreWindow const&, VisibilityChangedEventArgs const& args) {
+          OnVisibilityChanged(args.Visible());
+        });
       });
     }
 
@@ -62,10 +61,10 @@ namespace winrt::ServoApp::implementation
 
     void BrowserPage::OnVisibilityChanged(bool visible)
     {
-        if (visible && mRenderSurface != EGL_NO_SURFACE) {
+        if (visible && !IsLoopRunning()) {
           StartRenderLoop();
         }
-        else {
+        if (!visible && IsLoopRunning()) {
           StopRenderLoop();
         }
     }
@@ -94,8 +93,14 @@ namespace winrt::ServoApp::implementation
       StartRenderLoop();
     }
 
-    IAsyncAction BrowserPage::Loop()
+    bool BrowserPage::IsLoopRunning()
     {
+      return mLoopTask != std::nullopt && !(*mLoopTask).is_done();
+    }
+
+    void BrowserPage::Loop(cancellation_token cancel)
+    {
+      log("BrowserPage::Loop() thread: %i", GetCurrentThreadId());
 
       HANDLE hEvent = ::CreateEventA(nullptr, FALSE, FALSE, sWakeupEvent);
 
@@ -128,7 +133,7 @@ namespace winrt::ServoApp::implementation
       glViewport(0, 0, panelWidth, panelHeight);
       mServo = new Servo(panelWidth, panelHeight);
 
-      while (mRenderLoop.Status() == Windows::Foundation::AsyncStatus::Started) {
+      while (!cancel.is_canceled()) {
         // Block until Servo::sWakeUp is called.
         // Or run full speed if animating (see on_animating_changed),
         // it will endup blocking on SwapBuffers to limit rendering to 60FPS
@@ -137,29 +142,33 @@ namespace winrt::ServoApp::implementation
         }
         mServo->PerformUpdates();
       }
-
-      co_return;
+      cancel_current_task();
     }
 
     void BrowserPage::StartRenderLoop()
     {
-      if (mRenderLoop != nullptr && mRenderLoop.Status() == AsyncStatus::Started) {
+      if (IsLoopRunning()) {
         return;
       }
+
+      auto token = mLoopCancel.get_token();
 
       Servo::sWakeUp = []() {
         HANDLE hEvent = ::OpenEventA(EVENT_ALL_ACCESS, FALSE, sWakeupEvent);
         ::SetEvent(hEvent);
       };
 
-      mRenderLoop = Loop();
+      log("BrowserPage::StartRenderLoop() thread: %i", GetCurrentThreadId());
+
+      mLoopTask.emplace(concurrency::create_task([=] { Loop(token); }, token));
     }
 
     void BrowserPage::StopRenderLoop()
     {
-      if (mRenderLoop) {
-        mRenderLoop.Cancel();
-        mRenderLoop = nullptr;
+      if (IsLoopRunning()) {
+        mLoopCancel.cancel();
+        (*mLoopTask).wait();
+        mLoopTask.reset();
       }
     }
 
