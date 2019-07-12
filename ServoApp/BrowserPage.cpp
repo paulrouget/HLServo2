@@ -71,17 +71,15 @@ namespace winrt::ServoApp::implementation
 
     void BrowserPage::CreateRenderSurface()
     {
-      if (/*mOpenGLES &&*/ mRenderSurface == EGL_NO_SURFACE) {
+      if (mRenderSurface == EGL_NO_SURFACE) {
         mRenderSurface = mOpenGLES.CreateSurface(swapChainPanel());
       }
     }
 
     void BrowserPage::DestroyRenderSurface()
     {
-      // FIXME if (mOpenGLES) {
-        mOpenGLES.DestroySurface(mRenderSurface);
-      // }
-      mRenderSurface = EGL_NO_SURFACE;
+       mOpenGLES.DestroySurface(mRenderSurface);
+       mRenderSurface = EGL_NO_SURFACE;
     }
 
     void BrowserPage::RecoverFromLostDevice()
@@ -104,8 +102,7 @@ namespace winrt::ServoApp::implementation
 
       HANDLE hEvent = ::CreateEventA(nullptr, FALSE, FALSE, sWakeupEvent);
 
-      // Called by Servo
-      Servo::sMakeCurrent = [this]() {
+      Servo::sMakeCurrent = [=]() {
         /* EGLint panelWidth = 0; */
         /* EGLint panelHeight = 0; */
         /* mOpenGLES->GetSurfaceDimensions(mRenderSurface, &panelWidth, &panelHeight); */
@@ -114,8 +111,7 @@ namespace winrt::ServoApp::implementation
         mOpenGLES.MakeCurrent(mRenderSurface);
       };
 
-      // Called by Servo
-      Servo::sFlush = [this]() {
+      Servo::sFlush = [=]() {
         if (mOpenGLES.SwapBuffers(mRenderSurface) != GL_TRUE) {
           // The call to eglSwapBuffers might not be successful (i.e. due to Device Lost)
           // If the call fails, then we must reinitialize EGL and the GL resources.
