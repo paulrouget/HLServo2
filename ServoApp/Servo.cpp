@@ -3,15 +3,36 @@
 
 void on_load_started() {}
 void on_load_ended() {}
-void on_title_changed(const char*) {}
-void on_url_changed(const char*) {}
 void on_history_changed(bool, bool) {}
 void on_shutdown_complete() {}
 
-std::function<void()> Servo::sFlush = [](){};
-std::function<void()> Servo::sMakeCurrent = [](){};
-std::function<void()> Servo::sWakeUp = [](){};
+std::function<void()> Servo::sFlush = []() {};
+std::function<void()> Servo::sMakeCurrent = []() {};
+std::function<void()> Servo::sWakeUp = []() {};
+std::function<void(std::wstring const&)> Servo::sOnTitleChanged = [](std::wstring const&) {};
+std::function<void(std::wstring const&)> Servo::sOnURLChanged = [](std::wstring const&) {};
+
+
 bool Servo::sAnimating = false;
+
+std::wstring char2w(const char* c_str)
+{
+  auto str = std::string(c_str);
+  int size_needed = MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), NULL, 0);
+  std::wstring str2(size_needed, 0);
+  MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), &str2[0], size_needed);
+  return str2;
+}
+
+void on_title_changed(const char* title)
+{
+  Servo::sOnTitleChanged(char2w(title));
+}
+
+void on_url_changed(const char* url)
+{
+  Servo::sOnURLChanged(char2w(url));
+}
 
 void flush() {
   Servo::sFlush();
