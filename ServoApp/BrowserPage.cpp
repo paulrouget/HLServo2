@@ -10,11 +10,11 @@
 #include "winrt/Windows.UI.ViewManagement.h"
 
 using namespace winrt;
-using namespace Windows::UI::Xaml;
-using namespace Windows::UI::Core;
-using namespace Windows::UI::ViewManagement;
-using namespace Windows::Foundation;
-using namespace Windows::Graphics::Holographic;
+using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Windows::UI::Core;
+using namespace winrt::Windows::UI::ViewManagement;
+using namespace winrt::Windows::Foundation;
+using namespace winrt::Windows::Graphics::Holographic;
 using namespace Concurrency;
 
 static char sWakeupEvent[] = "SIGNAL_WAKEUP";
@@ -49,12 +49,12 @@ namespace winrt::ServoApp::implementation
       log("Holographic space available");
       auto v = winrt::Windows::ApplicationModel::Core::CoreApplication::CreateNewView(ServoApp::ImmersiveViewSource());
       int parentId = ApplicationView::GetForCurrentView().Id();
-      v.Dispatcher().RunAsync(Windows::UI::Core::CoreDispatcherPriority::Low, [parentId]() {
+      v.Dispatcher().RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, [parentId]() {
         int winId = ApplicationView::GetForCurrentView().Id();
         // FIXME: pick one
         // ApplicationViewSwitcher::TryShowAsStandaloneAsync(winId, ViewSizePreference::Default, parentId, ViewSizePreference::Default);
         ApplicationViewSwitcher::SwitchAsync(winId, parentId);
-        log("Immersive view started");
+        // log("Immersive view started");
       });
     }
     else {
@@ -75,13 +75,13 @@ namespace winrt::ServoApp::implementation
   void BrowserPage::CreateRenderSurface()
   {
     if (mRenderSurface == EGL_NO_SURFACE) {
-      mRenderSurface = mOpenGLES.CreateSurface(swapChainPanel());
+      // FIXME:OGL mRenderSurface = mOpenGLES.CreateSurface(swapChainPanel());
     }
   }
 
   void BrowserPage::DestroyRenderSurface()
   {
-    mOpenGLES.DestroySurface(mRenderSurface);
+    // FIXME:OGL mOpenGLES.DestroySurface(mRenderSurface);
     mRenderSurface = EGL_NO_SURFACE;
   }
 
@@ -89,7 +89,7 @@ namespace winrt::ServoApp::implementation
   {
     StopRenderLoop();
     DestroyRenderSurface();
-    mOpenGLES.Reset();
+    // FIXME:OGL  mOpenGLES.Reset();
     CreateRenderSurface();
     StartRenderLoop();
   }
@@ -123,24 +123,25 @@ namespace winrt::ServoApp::implementation
       /* mOpenGLES->GetSurfaceDimensions(mRenderSurface, &panelWidth, &panelHeight); */
       /* glViewport(0, 0, panelWidth, panelHeight); */
       /* mServo->SetSize(panelWidth, panelHeight); */
-      mOpenGLES.MakeCurrent(mRenderSurface);
+     // FIXME:OGL  mOpenGLES.MakeCurrent(mRenderSurface);
     };
 
     Servo::sFlush = [=]() {
-      if (mOpenGLES.SwapBuffers(mRenderSurface) != GL_TRUE) {
-        // The call to eglSwapBuffers might not be successful (i.e. due to Device Lost)
-        // If the call fails, then we must reinitialize EGL and the GL resources.
-        swapChainPanel().Dispatcher().RunAsync(Windows::UI::Core::CoreDispatcherPriority::High, [this]() {
-          RecoverFromLostDevice();
-        });
-      }
+      // // FIXME:OGL 
+      //if (mOpenGLES.SwapBuffers(mRenderSurface) != GL_TRUE) {
+      //  // The call to eglSwapBuffers might not be successful (i.e. due to Device Lost)
+      //  // If the call fails, then we must reinitialize EGL and the GL resources.
+      //  swapChainPanel().Dispatcher().RunAsync(Windows::UI::Core::CoreDispatcherPriority::High, [this]() {
+      //    RecoverFromLostDevice();
+      //  });
+      // }
     };
 
-    mOpenGLES.MakeCurrent(mRenderSurface);
+  // FIXME:OGL mOpenGLES.MakeCurrent(mRenderSurface);
 
     EGLint panelWidth = 0;
     EGLint panelHeight = 0;
-    mOpenGLES.GetSurfaceDimensions(mRenderSurface, &panelWidth, &panelHeight);
+    // FIXME:OGL mOpenGLES.GetSurfaceDimensions(mRenderSurface, &panelWidth, &panelHeight);
     glViewport(0, 0, panelWidth, panelHeight);
     mServo = new Servo(panelWidth, panelHeight);
 

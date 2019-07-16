@@ -121,6 +121,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Common\CameraResources.h" />
+    <ClInclude Include="Common\DeviceResources.h" />
+    <ClInclude Include="Common\DirectXHelper.h" />
+    <ClInclude Include="Common\StepTimer.h" />
+    <ClInclude Include="Content\ShaderStructures.h" />
+    <ClInclude Include="Content\SpatialInputHandler.h" />
+    <ClInclude Include="Content\SpinningCubeRenderer.h" />
+    <ClInclude Include="HolographicApp2Main.h" />
     <ClInclude Include="ImmersiveView.h" />
     <ClInclude Include="logs.h" />
     <ClInclude Include="OpenGLES.h" />
@@ -319,6 +327,11 @@
     <Image Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Common\CameraResources.cpp" />
+    <ClCompile Include="Common\DeviceResources.cpp" />
+    <ClCompile Include="Content\SpatialInputHandler.cpp" />
+    <ClCompile Include="Content\SpinningCubeRenderer.cpp" />
+    <ClCompile Include="HolographicApp2Main.cpp" />
     <ClCompile Include="ImmersiveView.cpp" />
     <ClCompile Include="OpenGLES.cpp" />
     <ClCompile Include="pch.cpp">
@@ -345,6 +358,25 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="PropertySheet.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Content\PixelShader.hlsl">
+      <ShaderType>Pixel</ShaderType>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
+    <None Include="Content\VertexShaderShared.hlsl" />
+    <FxCompile Include="Content\VertexShader.hlsl">
+      <ShaderType>Vertex</ShaderType>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Content\VPRTVertexShader.hlsl">
+      <ShaderType>Vertex</ShaderType>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Content\GeometryShader.hlsl">
+      <ShaderType>Geometry</ShaderType>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

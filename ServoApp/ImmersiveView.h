@@ -1,8 +1,8 @@
 #pragma once
 #include "OpenGLES.h"
 
-// FIXME: #include "Common/DeviceResources.h"
-// FIXME: #include "HolographicApp1Main.h"
+#include "Common/DeviceResources.h"
+#include "HolographicApp2Main.h"
 
 namespace winrt::ServoApp
 {
@@ -33,9 +33,9 @@ namespace winrt::ServoApp
     void OnPointerPressed(winrt::Windows::UI::Core::CoreWindow const& sender, winrt::Windows::UI::Core::PointerEventArgs const& args);
 
   private:
-    // FIXME: std::unique_ptr<HolographicApp1Main> m_main;
+    std::unique_ptr<HolographicApp2::HolographicApp2Main> m_main;
 
-    // FIXME: std::shared_ptr<DX::DeviceResources>                    m_deviceResources;
+    std::shared_ptr<DX::DeviceResources>                    m_deviceResources;
     bool                                                    m_windowClosed = false;
     bool                                                    m_windowVisible = true;
 
@@ -51,7 +51,7 @@ namespace winrt::ServoApp
     winrt::Windows::Graphics::Holographic::HolographicSpace m_holographicSpace = nullptr;
 
     // FIXME: initialization is done twice: here and in BrowserPage. Share it.
-    OpenGLES mOpenGLES;
+    // OpenGLES mOpenGLES;
     EGLSurface mRenderSurface{ EGL_NO_SURFACE };
 
 

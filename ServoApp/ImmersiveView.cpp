@@ -1,5 +1,7 @@
 ﻿#include "pch.h"
+#include "logs.h"
 #include "ImmersiveView.h"
+#include "HolographicApp2Main.h"
 
 using namespace winrt::ServoApp;
 
@@ -11,6 +13,15 @@ using namespace winrt::Windows::ApplicationModel::Core;
 using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Graphics::Holographic;
 using namespace winrt::Windows::UI::Core;
+
+
+// Immediatly start immersive mode:
+//int __stdcall wWinMain(HINSTANCE, HINSTANCE, PWSTR, int)
+//{
+//  winrt::init_apartment();
+//  CoreApplication::Run(ImmersiveViewSource());
+//  return 0;
+//}
 
 // IFrameworkViewSource methods
 
@@ -33,9 +44,9 @@ void ImmersiveView::Initialize(CoreApplicationView const& applicationView)
 
   // At this point we have access to the device and we can create device-dependent
   // resources.
-  // FIXME: m_deviceResources = std::make_shared<DX::DeviceResources>();
+  m_deviceResources = std::make_shared<DX::DeviceResources>();
 
-  // FIXME: m_main = std::make_unique<HolographicApp1Main>(m_deviceResources);
+  m_main = std::make_unique<HolographicApp2::HolographicApp2Main>(m_deviceResources);
 }
 
 // Called when the CoreWindow object is created (or re-created).
@@ -62,15 +73,10 @@ void ImmersiveView::SetWindow(CoreWindow const& window)
   // space (when available) to create a Direct3D device. The HolographicSpace
   // uses this ID3D11Device to create and manage device-based resources such as
   // swap chains.
-  // FIXME: m_deviceResources->SetHolographicSpace(m_holographicSpace);
+  m_deviceResources->SetHolographicSpace(m_holographicSpace);
 
   // The main class uses the holographic space for updates and rendering.
-  // FIXME: m_main->SetHolographicSpace(m_holographicSpace);
-
-  // FIXME
-  // if (mRenderSurface == EGL_NO_SURFACE) {
-  //   mRenderSurface = mOpenGLES.CreateSurface(window);
-  // }
+  m_main->SetHolographicSpace(m_holographicSpace);
 }
 
 // The Load method can be used to initialize scene resources or to load a
@@ -85,19 +91,20 @@ void ImmersiveView::Run()
 {
   while (!m_windowClosed)
   {
+    log("Meh: %s %s", m_windowVisible ? "T" : "F", (m_holographicSpace != nullptr) ? "T" : "F");
+
     if (m_windowVisible && (m_holographicSpace != nullptr))
     {
       CoreWindow::GetForCurrentThread().Dispatcher().ProcessEvents(CoreProcessEventsOption::ProcessAllIfPresent);
 
-      // FIXME: HolographicFrame holographicFrame = m_main->Update();
+       HolographicFrame holographicFrame = m_main->Update();
 
-      // FIXME:
-      //if (m_main->Render(holographicFrame))
-      //{
-      //    // The holographic frame has an API that presents the swap chain for each
-      //    // holographic camera.
-      //    m_deviceResources->Present(holographicFrame);
-      //}
+      if (m_main->Render(holographicFrame))
+      {
+          // The holographic frame has an API that presents the swap chain for each
+          // holographic camera.
+          m_deviceResources->Present(holographicFrame);
+      }
     }
     else
     {
@@ -111,7 +118,7 @@ void ImmersiveView::Run()
 void ImmersiveView::Uninitialize()
 {
   // FIXME: m_main.reset();
-  // FIXME: m_deviceResources.reset();
+  m_deviceResources.reset();
 
   CoreApplication::Suspending(m_suspendingEventToken);
   CoreApplication::Resuming(m_resumingEventToken);
@@ -155,13 +162,12 @@ void ImmersiveView::OnSuspending(winrt::Windows::Foundation::IInspectable const&
 
   create_task([this, deferral]()
   {
-    //FIXME: m_deviceResources->Trim();
+    m_deviceResources->Trim();
 
-    // FIXME
-    //if (m_main != nullptr)
-    //{
-    //    m_main->SaveAppState();
-    //}
+    if (m_main != nullptr)
+    {
+        m_main->SaveAppState();
+    }
 
     //
     // TODO: Insert code here to save your app state.
@@ -177,11 +183,10 @@ void ImmersiveView::OnResuming(winrt::Windows::Foundation::IInspectable const& s
   // and state are persisted when resuming from suspend. Note that this event
   // does not occur if the app was previously terminated.
 
-  //FIXME
-  // if (m_main != nullptr)
-  //{
-  //    m_main->LoadAppState();
-  //}
+   if (m_main != nullptr)
+  {
+      m_main->LoadAppState();
+  }
 
   //
   // TODO: Insert code here to load your app state.
@@ -216,10 +221,9 @@ void ImmersiveView::OnKeyPressed(CoreWindow const& sender, KeyEventArgs const& a
 void ImmersiveView::OnPointerPressed(CoreWindow const& sender, PointerEventArgs const& args)
 {
   // Allow the user to interact with the holographic world using the mouse.
-  //FIXME:
-  //if (m_main != nullptr)
-  //{
-  //    m_main->OnPointerPressed();
-  //}
+  if (m_main != nullptr)
+  {
+      m_main->OnPointerPressed();
+  }
 }
 
