@@ -1,5 +1,4 @@
 #pragma once
-#include "OpenGLES.h"
 
 #include "Common/DeviceResources.h"
 #include "HolographicApp2Main.h"
@@ -49,10 +48,6 @@ namespace winrt::ServoApp
 
     // The holographic space the app will use for rendering.
     winrt::Windows::Graphics::Holographic::HolographicSpace m_holographicSpace = nullptr;
-
-    // FIXME: initialization is done twice: here and in BrowserPage. Share it.
-    // OpenGLES mOpenGLES;
-    EGLSurface mRenderSurface{ EGL_NO_SURFACE };
 
 
   };

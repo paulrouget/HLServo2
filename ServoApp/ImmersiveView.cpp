@@ -1,5 +1,4 @@
 ﻿#include "pch.h"
-#include "logs.h"
 #include "ImmersiveView.h"
 #include "HolographicApp2Main.h"
 
@@ -14,14 +13,15 @@ using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Graphics::Holographic;
 using namespace winrt::Windows::UI::Core;
 
-
+#if 0
 // Immediatly start immersive mode:
-//int __stdcall wWinMain(HINSTANCE, HINSTANCE, PWSTR, int)
-//{
-//  winrt::init_apartment();
-//  CoreApplication::Run(ImmersiveViewSource());
-//  return 0;
-//}
+int __stdcall wWinMain(HINSTANCE, HINSTANCE, PWSTR, int)
+{
+  winrt::init_apartment();
+  CoreApplication::Run(ImmersiveViewSource());
+  return 0;
+}
+#endif
 
 // IFrameworkViewSource methods
 
@@ -91,7 +91,6 @@ void ImmersiveView::Run()
 {
   while (!m_windowClosed)
   {
-    log("Meh: %s %s", m_windowVisible ? "T" : "F", (m_holographicSpace != nullptr) ? "T" : "F");
 
     if (m_windowVisible && (m_holographicSpace != nullptr))
     {

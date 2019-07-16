@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "App.xaml.g.h"
-#include "OpenGLES.h"
 
 namespace winrt::ServoApp::implementation
 {
