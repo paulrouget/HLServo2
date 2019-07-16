@@ -30,7 +30,6 @@ namespace winrt::ServoApp::implementation
     EGLSurface mRenderSurface{ EGL_NO_SURFACE };
     Servo* mServo;
 
-    // FIXME: move to App.cpp? Pass as arg to BrowserPage ctor?
     OpenGLES mOpenGLES;
   };
 }

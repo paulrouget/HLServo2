@@ -66,6 +66,11 @@ void ImmersiveView::SetWindow(CoreWindow const& window)
 
   // The main class uses the holographic space for updates and rendering.
   // FIXME: m_main->SetHolographicSpace(m_holographicSpace);
+
+  // FIXME
+  // if (mRenderSurface == EGL_NO_SURFACE) {
+  //   mRenderSurface = mOpenGLES.CreateSurface(window);
+  // }
 }
 
 // The Load method can be used to initialize scene resources or to load a

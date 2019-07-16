@@ -1,4 +1,5 @@
 #pragma once
+#include "OpenGLES.h"
 
 // FIXME: #include "Common/DeviceResources.h"
 // FIXME: #include "HolographicApp1Main.h"
@@ -48,6 +49,12 @@ namespace winrt::ServoApp
 
     // The holographic space the app will use for rendering.
     winrt::Windows::Graphics::Holographic::HolographicSpace m_holographicSpace = nullptr;
+
+    // FIXME: initialization is done twice: here and in BrowserPage. Share it.
+    OpenGLES mOpenGLES;
+    EGLSurface mRenderSurface{ EGL_NO_SURFACE };
+
+
   };
 
   class ImmersiveViewSource sealed : public winrt::implements<ImmersiveViewSource, winrt::Windows::ApplicationModel::Core::IFrameworkViewSource>

@@ -26,11 +26,12 @@ namespace winrt::ServoApp::implementation
     InitializeComponent();
     log("BrowserPage::BrowserPage()");
     Loaded([this](IInspectable const&, RoutedEventArgs const&) {
-      OnPageLoaded();
-      auto window = Window::Current().CoreWindow();
-      window.VisibilityChanged([this](CoreWindow const&, VisibilityChangedEventArgs const& args) {
-        OnVisibilityChanged(args.Visible());
-      });
+      // FIXME: tmp as I work on immersive opengl surface
+      //OnPageLoaded();
+      //auto window = Window::Current().CoreWindow();
+      //window.VisibilityChanged([this](CoreWindow const&, VisibilityChangedEventArgs const& args) {
+      //  OnVisibilityChanged(args.Visible());
+      //});
     });
   }
 
@@ -50,7 +51,9 @@ namespace winrt::ServoApp::implementation
       int parentId = ApplicationView::GetForCurrentView().Id();
       v.Dispatcher().RunAsync(Windows::UI::Core::CoreDispatcherPriority::Low, [parentId]() {
         int winId = ApplicationView::GetForCurrentView().Id();
-        ApplicationViewSwitcher::TryShowAsStandaloneAsync(winId, ViewSizePreference::Default, parentId, ViewSizePreference::Default);
+        // FIXME: pick one
+        // ApplicationViewSwitcher::TryShowAsStandaloneAsync(winId, ViewSizePreference::Default, parentId, ViewSizePreference::Default);
+        ApplicationViewSwitcher::SwitchAsync(winId, parentId);
         log("Immersive view started");
       });
     }
