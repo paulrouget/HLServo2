@@ -1,6 +1,6 @@
 #pragma once
 
-namespace HolographicApp2
+namespace Immersive
 {
     // Constant buffer used to send hologram position transform to the shader pipeline.
     struct ModelConstantBuffer

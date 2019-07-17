@@ -19,13 +19,13 @@
     <ClCompile Include="Common\DeviceResources.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="HolographicApp2Main.cpp" />
     <ClCompile Include="Content\SpatialInputHandler.cpp">
       <Filter>Content</Filter>
     </ClCompile>
     <ClCompile Include="Content\SpinningCubeRenderer.cpp">
       <Filter>Content</Filter>
     </ClCompile>
+    <ClCompile Include="ImmersiveMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -47,7 +47,6 @@
     <ClInclude Include="Common\StepTimer.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="HolographicApp2Main.h" />
     <ClInclude Include="Content\ShaderStructures.h">
       <Filter>Content</Filter>
     </ClInclude>
@@ -57,6 +56,7 @@
     <ClInclude Include="Content\SpinningCubeRenderer.h">
       <Filter>Content</Filter>
     </ClInclude>
+    <ClInclude Include="ImmersiveMain.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
@@ -289,5 +289,8 @@
     <FxCompile Include="Content\VPRTVertexShader.hlsl">
       <Filter>Content</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
   </ItemGroup>
 </Project>

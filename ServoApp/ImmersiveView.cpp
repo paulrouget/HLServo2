@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
 #include "logs.h"
 #include "ImmersiveView.h"
-#include "HolographicApp2Main.h"
+#include "ImmersiveMain.h"
 
 using namespace winrt::ServoApp;
 
@@ -46,7 +46,7 @@ void ImmersiveView::Initialize(CoreApplicationView const& applicationView)
   // resources.
   m_deviceResources = std::make_shared<DX::DeviceResources>();
 
-  m_main = std::make_unique<HolographicApp2::ImmersiveMain>(m_deviceResources);
+  m_main = std::make_unique<Immersive::ImmersiveMain>(m_deviceResources);
 }
 
 // Called when the CoreWindow object is created (or re-created).

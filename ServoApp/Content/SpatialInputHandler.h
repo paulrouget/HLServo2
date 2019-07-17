@@ -1,6 +1,6 @@
 #pragma once
 
-namespace HolographicApp2
+namespace Immersive
 {
     // Sample gesture handler.
     // Hooks up events to recognize a tap gesture, and keeps track of input using a boolean value.

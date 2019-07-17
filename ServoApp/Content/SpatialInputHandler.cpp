@@ -2,7 +2,7 @@
 #include "SpatialInputHandler.h"
 #include <functional>
 
-using namespace HolographicApp2;
+using namespace Immersive;
 
 using namespace std::placeholders;
 using namespace winrt::Windows::Foundation;

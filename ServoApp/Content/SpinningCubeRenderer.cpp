@@ -2,7 +2,7 @@
 #include "SpinningCubeRenderer.h"
 #include "Common/DirectXHelper.h"
 
-using namespace HolographicApp2;
+using namespace Immersive;
 using namespace DirectX;
 using namespace winrt::Windows::Foundation::Numerics;
 using namespace winrt::Windows::UI::Input::Spatial;

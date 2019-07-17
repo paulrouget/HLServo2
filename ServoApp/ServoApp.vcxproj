@@ -128,7 +128,7 @@
     <ClInclude Include="Content\ShaderStructures.h" />
     <ClInclude Include="Content\SpatialInputHandler.h" />
     <ClInclude Include="Content\SpinningCubeRenderer.h" />
-    <ClInclude Include="HolographicApp2Main.h" />
+    <ClInclude Include="ImmersiveMain.h" />
     <ClInclude Include="ImmersiveView.h" />
     <ClInclude Include="logs.h" />
     <ClInclude Include="OpenGLES.h" />
@@ -331,7 +331,7 @@
     <ClCompile Include="Common\DeviceResources.cpp" />
     <ClCompile Include="Content\SpatialInputHandler.cpp" />
     <ClCompile Include="Content\SpinningCubeRenderer.cpp" />
-    <ClCompile Include="HolographicApp2Main.cpp" />
+    <ClCompile Include="ImmersiveMain.cpp" />
     <ClCompile Include="ImmersiveView.cpp" />
     <ClCompile Include="OpenGLES.cpp" />
     <ClCompile Include="pch.cpp">

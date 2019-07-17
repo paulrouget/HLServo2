@@ -4,7 +4,7 @@
 #include "../Common/StepTimer.h"
 #include "ShaderStructures.h"
 
-namespace HolographicApp2
+namespace Immersive
 {
     // This sample renderer instantiates a basic rendering pipeline.
     class SpinningCubeRenderer

@@ -2,7 +2,7 @@
 #include "OpenGLES.h"
 
 #include "Common/DeviceResources.h"
-#include "HolographicApp2Main.h"
+#include "ImmersiveMain.h"
 
 namespace winrt::ServoApp
 {
@@ -33,7 +33,7 @@ namespace winrt::ServoApp
     void OnPointerPressed(winrt::Windows::UI::Core::CoreWindow const& sender, winrt::Windows::UI::Core::PointerEventArgs const& args);
 
   private:
-    std::unique_ptr<HolographicApp2::ImmersiveMain> m_main;
+    std::unique_ptr<Immersive::ImmersiveMain> m_main;
 
     std::shared_ptr<DX::DeviceResources>                    m_deviceResources;
     bool                                                    m_windowClosed = false;
