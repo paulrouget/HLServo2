@@ -33,7 +33,7 @@ namespace winrt::ServoApp::implementation
     EGLSurface mRenderSurface{ EGL_NO_SURFACE };
     Servo* mServo;
 
-    // FIXME:OGL OpenGLES mOpenGLES;
+    OpenGLES mOpenGLES;
   };
 }
 
