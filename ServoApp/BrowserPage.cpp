@@ -9,13 +9,12 @@
 // https://devblogs.microsoft.com/oldnewthing/20190530-00/?p=102529
 #include "winrt/Windows.UI.ViewManagement.h"
 
-using namespace winrt;
 using namespace winrt::Windows::UI::Xaml;
 using namespace winrt::Windows::UI::Core;
 using namespace winrt::Windows::UI::ViewManagement;
 using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Graphics::Holographic;
-using namespace Concurrency;
+using namespace concurrency;
 
 static char sWakeupEvent[] = "SIGNAL_WAKEUP";
 
@@ -93,7 +92,7 @@ namespace winrt::ServoApp::implementation
 
   bool BrowserPage::IsLoopRunning()
   {
-    return mLoopTask != std::nullopt && !(*mLoopTask).is_done();
+    return mLoopTask != nullptr && !mLoopTask->is_done();
   }
 
   void BrowserPage::Loop(cancellation_token cancel)
@@ -130,7 +129,7 @@ namespace winrt::ServoApp::implementation
         swapChainPanel().Dispatcher().RunAsync(Windows::UI::Core::CoreDispatcherPriority::High, [this]() {
           RecoverFromLostDevice();
         });
-       }
+      }
     };
 
     mOpenGLES.MakeCurrent(mRenderSurface);
@@ -139,7 +138,7 @@ namespace winrt::ServoApp::implementation
     EGLint panelHeight = 0;
     mOpenGLES.GetSurfaceDimensions(mRenderSurface, &panelWidth, &panelHeight);
     glViewport(0, 0, panelWidth, panelHeight);
-    mServo = new Servo(panelWidth, panelHeight);
+    mServo = std::make_unique<Servo>(panelWidth, panelHeight);
 
     while (!cancel.is_canceled()) {
       // Block until Servo::sWakeUp is called.
@@ -168,14 +167,16 @@ namespace winrt::ServoApp::implementation
 
     log("BrowserPage::StartRenderLoop() thread: %i", GetCurrentThreadId());
 
-    mLoopTask.emplace(concurrency::create_task([=] { Loop(token); }, token));
+    mLoopTask = std::make_unique<Concurrency::task<void>>(Concurrency::create_task([=] {
+      Loop(token);
+    }, token));
   }
 
   void BrowserPage::StopRenderLoop()
   {
     if (IsLoopRunning()) {
       mLoopCancel.cancel();
-      (*mLoopTask).wait();
+      mLoopTask->wait();
       mLoopTask.reset();
     }
   }

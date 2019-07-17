@@ -33,7 +33,7 @@ namespace winrt::ServoApp
     void OnPointerPressed(winrt::Windows::UI::Core::CoreWindow const& sender, winrt::Windows::UI::Core::PointerEventArgs const& args);
 
   private:
-    std::unique_ptr<HolographicApp2::HolographicApp2Main> m_main;
+    std::unique_ptr<HolographicApp2::ImmersiveMain> m_main;
 
     std::shared_ptr<DX::DeviceResources>                    m_deviceResources;
     bool                                                    m_windowClosed = false;

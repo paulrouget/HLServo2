@@ -22,7 +22,7 @@
       <StackPanel Orientation="Horizontal" Grid.Column="0">
         <Button Content="Back"/>
         <Button Content="Forward"/>
-        <Button Content="StopReload"/>
+        <Button Content="Stop/Reload"/>
       </StackPanel>
       <TextBox Text="" AcceptsReturn="True" PlaceholderText="Type a URL" x:Name="urlTextbox" Grid.Column="1" IsReadOnly="True"/>
       <StackPanel Orientation="Horizontal" Grid.Column="2">

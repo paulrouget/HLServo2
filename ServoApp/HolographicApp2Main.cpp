@@ -16,15 +16,15 @@ using namespace winrt::Windows::Perception::Spatial;
 using namespace winrt::Windows::UI::Input::Spatial;
 
 // Loads and initializes application assets when the application is loaded.
-HolographicApp2Main::HolographicApp2Main(std::shared_ptr<DX::DeviceResources> const& deviceResources) :
+ImmersiveMain::ImmersiveMain(std::shared_ptr<DX::DeviceResources> const& deviceResources) :
     m_deviceResources(deviceResources)
 {
     // Register to be notified if the device is lost or recreated.
     m_deviceResources->RegisterDeviceNotify(this);
 
     // If connected, a game controller can also be used for input.
-    m_gamepadAddedEventToken = Gamepad::GamepadAdded(bind(&HolographicApp2Main::OnGamepadAdded, this, _1, _2));
-    m_gamepadRemovedEventToken = Gamepad::GamepadRemoved(bind(&HolographicApp2Main::OnGamepadRemoved, this, _1, _2));
+    m_gamepadAddedEventToken = Gamepad::GamepadAdded(bind(&ImmersiveMain::OnGamepadAdded, this, _1, _2));
+    m_gamepadRemovedEventToken = Gamepad::GamepadRemoved(bind(&ImmersiveMain::OnGamepadRemoved, this, _1, _2));
 
     for (Gamepad const& gamepad : Gamepad::Gamepads())
     {
@@ -39,14 +39,14 @@ HolographicApp2Main::HolographicApp2Main(std::shared_ptr<DX::DeviceResources> co
     {
         // Subscribe for notifications about changes to the state of the default HolographicDisplay 
         // and its SpatialLocator.
-        m_holographicDisplayIsAvailableChangedEventToken = HolographicSpace::IsAvailableChanged(bind(&HolographicApp2Main::OnHolographicDisplayIsAvailableChanged, this, _1, _2));
+        m_holographicDisplayIsAvailableChangedEventToken = HolographicSpace::IsAvailableChanged(bind(&ImmersiveMain::OnHolographicDisplayIsAvailableChanged, this, _1, _2));
     }
 
     // Acquire the current state of the default HolographicDisplay and its SpatialLocator.
     OnHolographicDisplayIsAvailableChanged(nullptr, nullptr);
 }
 
-void HolographicApp2Main::SetHolographicSpace(HolographicSpace const& holographicSpace)
+void ImmersiveMain::SetHolographicSpace(HolographicSpace const& holographicSpace)
 {
     UnregisterHolographicEventHandlers();
 
@@ -70,7 +70,7 @@ void HolographicApp2Main::SetHolographicSpace(HolographicSpace const& holographi
     // allows the app to take more than one frame to finish creating resources and
     // loading assets for the new holographic camera.
     // This function should be registered before the app creates any HolographicFrames.
-    m_cameraAddedToken = m_holographicSpace.CameraAdded(std::bind(&HolographicApp2Main::OnCameraAdded, this, _1, _2));
+    m_cameraAddedToken = m_holographicSpace.CameraAdded(std::bind(&ImmersiveMain::OnCameraAdded, this, _1, _2));
 
     // Respond to camera removed events by releasing resources that were created for that
     // camera.
@@ -78,7 +78,7 @@ void HolographicApp2Main::SetHolographicSpace(HolographicSpace const& holographi
     // buffer right away. This includes render target views, Direct2D target bitmaps, and so on.
     // The app must also ensure that the back buffer is not attached as a render target, as
     // shown in DeviceResources::ReleaseResourcesForBackBuffer.
-    m_cameraRemovedToken = m_holographicSpace.CameraRemoved(std::bind(&HolographicApp2Main::OnCameraRemoved, this, _1, _2));
+    m_cameraRemovedToken = m_holographicSpace.CameraRemoved(std::bind(&ImmersiveMain::OnCameraRemoved, this, _1, _2));
 
     // Notes on spatial tracking APIs:
     // * Stationary reference frames are designed to provide a best-fit position relative to the
@@ -91,7 +91,7 @@ void HolographicApp2Main::SetHolographicSpace(HolographicSpace const& holographi
     //   occurred.
 }
 
-void HolographicApp2Main::UnregisterHolographicEventHandlers()
+void ImmersiveMain::UnregisterHolographicEventHandlers()
 {
     if (m_holographicSpace != nullptr)
     {
@@ -108,7 +108,7 @@ void HolographicApp2Main::UnregisterHolographicEventHandlers()
     }
 }
 
-HolographicApp2Main::~HolographicApp2Main()
+ImmersiveMain::~ImmersiveMain()
 {
     // Deregister device notification.
     m_deviceResources->RegisterDeviceNotify(nullptr);
@@ -121,7 +121,7 @@ HolographicApp2Main::~HolographicApp2Main()
 }
 
 // Updates the application state once per frame.
-HolographicFrame HolographicApp2Main::Update()
+HolographicFrame ImmersiveMain::Update()
 {
     // Before doing the timer update, there is some work to do per-frame
     // to maintain holographic rendering. First, we will get information
@@ -224,7 +224,7 @@ HolographicFrame HolographicApp2Main::Update()
 // Renders the current frame to each holographic camera, according to the
 // current application and spatial positioning state. Returns true if the
 // frame was rendered to at least one camera.
-bool HolographicApp2Main::Render(HolographicFrame const& holographicFrame)
+bool ImmersiveMain::Render(HolographicFrame const& holographicFrame)
 {
     // Don't try to render anything before the first Update.
     if (m_timer.GetFrameCount() == 0)
@@ -334,7 +334,7 @@ bool HolographicApp2Main::Render(HolographicFrame const& holographicFrame)
     });
 }
 
-void HolographicApp2Main::SaveAppState()
+void ImmersiveMain::SaveAppState()
 {
     //
     // TODO: Insert code here to save your app state.
@@ -344,7 +344,7 @@ void HolographicApp2Main::SaveAppState()
     //
 }
 
-void HolographicApp2Main::LoadAppState()
+void ImmersiveMain::LoadAppState()
 {
     //
     // TODO: Insert code here to load your app state.
@@ -354,14 +354,14 @@ void HolographicApp2Main::LoadAppState()
     //
 }
 
-void HolographicApp2Main::OnPointerPressed()
+void ImmersiveMain::OnPointerPressed()
 {
     m_pointerPressed = true;
 }
 
 // Notifies classes that use Direct3D device resources that the device resources
 // need to be released before this method returns.
-void HolographicApp2Main::OnDeviceLost()
+void ImmersiveMain::OnDeviceLost()
 {
 #ifdef DRAW_SAMPLE_CONTENT
     m_spinningCubeRenderer->ReleaseDeviceDependentResources();
@@ -370,14 +370,14 @@ void HolographicApp2Main::OnDeviceLost()
 
 // Notifies classes that use Direct3D device resources that the device resources
 // may now be recreated.
-void HolographicApp2Main::OnDeviceRestored()
+void ImmersiveMain::OnDeviceRestored()
 {
 #ifdef DRAW_SAMPLE_CONTENT
     m_spinningCubeRenderer->CreateDeviceDependentResources();
 #endif
 }
 
-void HolographicApp2Main::OnLocatabilityChanged(SpatialLocator const& sender, winrt::Windows::Foundation::IInspectable const& args)
+void ImmersiveMain::OnLocatabilityChanged(SpatialLocator const& sender, winrt::Windows::Foundation::IInspectable const& args)
 {
     switch (sender.Locatability())
     {
@@ -408,7 +408,7 @@ void HolographicApp2Main::OnLocatabilityChanged(SpatialLocator const& sender, wi
     }
 }
 
-void HolographicApp2Main::OnCameraAdded(
+void ImmersiveMain::OnCameraAdded(
     HolographicSpace const& sender,
     HolographicSpaceCameraAddedEventArgs const& args
 )
@@ -440,7 +440,7 @@ void HolographicApp2Main::OnCameraAdded(
     });
 }
 
-void HolographicApp2Main::OnCameraRemoved(
+void ImmersiveMain::OnCameraRemoved(
     HolographicSpace const& sender,
     HolographicSpaceCameraRemovedEventArgs const& args
 )
@@ -462,7 +462,7 @@ void HolographicApp2Main::OnCameraRemoved(
     m_deviceResources->RemoveHolographicCamera(args.Camera());
 }
 
-void HolographicApp2Main::OnGamepadAdded(winrt::Windows::Foundation::IInspectable, Gamepad const& args)
+void ImmersiveMain::OnGamepadAdded(winrt::Windows::Foundation::IInspectable, Gamepad const& args)
 {
     for (GamepadWithButtonState const& gamepadWithButtonState : m_gamepads)
     {
@@ -477,7 +477,7 @@ void HolographicApp2Main::OnGamepadAdded(winrt::Windows::Foundation::IInspectabl
     m_gamepads.push_back(newGamepad);
 }
 
-void HolographicApp2Main::OnGamepadRemoved(winrt::Windows::Foundation::IInspectable, Gamepad const& args)
+void ImmersiveMain::OnGamepadRemoved(winrt::Windows::Foundation::IInspectable, Gamepad const& args)
 {
     m_gamepads.erase(std::remove_if(m_gamepads.begin(), m_gamepads.end(), [&](GamepadWithButtonState& gamepadWithState)
         {
@@ -486,7 +486,7 @@ void HolographicApp2Main::OnGamepadRemoved(winrt::Windows::Foundation::IInspecta
         m_gamepads.end());
 }
 
-void HolographicApp2Main::OnHolographicDisplayIsAvailableChanged(winrt::Windows::Foundation::IInspectable, winrt::Windows::Foundation::IInspectable)
+void ImmersiveMain::OnHolographicDisplayIsAvailableChanged(winrt::Windows::Foundation::IInspectable, winrt::Windows::Foundation::IInspectable)
 {
     // Get the spatial locator for the default HolographicDisplay, if one is available.
     SpatialLocator spatialLocator = nullptr;
@@ -521,7 +521,7 @@ void HolographicApp2Main::OnHolographicDisplayIsAvailableChanged(winrt::Windows:
             m_spatialLocator = spatialLocator;
 
             // Respond to changes in the positional tracking state.
-            m_locatabilityChangedToken = m_spatialLocator.LocatabilityChanged(std::bind(&HolographicApp2Main::OnLocatabilityChanged, this, _1, _2));
+            m_locatabilityChangedToken = m_spatialLocator.LocatabilityChanged(std::bind(&ImmersiveMain::OnLocatabilityChanged, this, _1, _2));
 
             // The simplest way to render world-locked holograms is to create a stationary reference frame
             // based on a SpatialLocator. This is roughly analogous to creating a "world" coordinate system

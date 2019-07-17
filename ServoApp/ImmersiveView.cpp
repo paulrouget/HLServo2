@@ -46,7 +46,7 @@ void ImmersiveView::Initialize(CoreApplicationView const& applicationView)
   // resources.
   m_deviceResources = std::make_shared<DX::DeviceResources>();
 
-  m_main = std::make_unique<HolographicApp2::HolographicApp2Main>(m_deviceResources);
+  m_main = std::make_unique<HolographicApp2::ImmersiveMain>(m_deviceResources);
 }
 
 // Called when the CoreWindow object is created (or re-created).

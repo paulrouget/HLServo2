@@ -9,10 +9,12 @@ namespace winrt::ServoApp::implementation
 {
   struct BrowserPage : BrowserPageT<BrowserPage>
   {
+  public:
     BrowserPage();
 
     void OnImmersiveButtonClicked(Windows::Foundation::IInspectable const&, Windows::UI::Xaml::RoutedEventArgs const&);
 
+  private:
     void OnVisibilityChanged(bool);
     void OnPageLoaded();
 
@@ -26,14 +28,12 @@ namespace winrt::ServoApp::implementation
     bool IsLoopRunning();
 
     Concurrency::cancellation_token_source mLoopCancel;
-    std::optional<Concurrency::task<void>> mLoopTask{};
-
+    std::unique_ptr<Concurrency::task<void>> mLoopTask;
     winrt::ServoApp::ImmersiveViewSource mImmersiveViewSource;
-
     EGLSurface mRenderSurface{ EGL_NO_SURFACE };
-    Servo* mServo;
+    std::unique_ptr<Servo> mServo;
 
-    OpenGLES mOpenGLES;
+    OpenGLES mOpenGLES; // FIXME: shared pointer
   };
 }
 
