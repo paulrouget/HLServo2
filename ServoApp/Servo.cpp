@@ -9,51 +9,39 @@ void on_shutdown_complete() {}
 std::function<void()> Servo::sFlush = []() {};
 std::function<void()> Servo::sMakeCurrent = []() {};
 std::function<void()> Servo::sWakeUp = []() {};
-std::function<void(std::wstring const&)> Servo::sOnTitleChanged = [](std::wstring const&) {};
-std::function<void(std::wstring const&)> Servo::sOnURLChanged = [](std::wstring const&) {};
-
+std::function<void(std::wstring const &)> Servo::sOnTitleChanged =
+    [](std::wstring const &) {};
+std::function<void(std::wstring const &)> Servo::sOnURLChanged =
+    [](std::wstring const &) {};
 
 bool Servo::sAnimating = false;
 
-std::wstring char2w(const char* c_str)
-{
+std::wstring char2w(const char *c_str) {
   auto str = std::string(c_str);
-  int size_needed = MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), NULL, 0);
+  int size_needed =
+      MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), NULL, 0);
   std::wstring str2(size_needed, 0);
-  MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), &str2[0], size_needed);
+  MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), &str2[0],
+                      size_needed);
   return str2;
 }
 
-void on_title_changed(const char* title)
-{
+void on_title_changed(const char *title) {
   Servo::sOnTitleChanged(char2w(title));
 }
 
-void on_url_changed(const char* url)
-{
-  Servo::sOnURLChanged(char2w(url));
-}
+void on_url_changed(const char *url) { Servo::sOnURLChanged(char2w(url)); }
 
-void flush() {
-  Servo::sFlush();
-}
+void flush() { Servo::sFlush(); }
 
-void make_current() {
-  Servo::sMakeCurrent();
-}
+void make_current() { Servo::sMakeCurrent(); }
 
-void wakeup() {
-  Servo::sWakeUp();
-}
+void wakeup() { Servo::sWakeUp(); }
 
-void on_animating_changed(bool aAnimating) {
-  Servo::sAnimating = aAnimating;
-}
+void on_animating_changed(bool aAnimating) { Servo::sAnimating = aAnimating; }
 
 Servo::Servo(GLsizei width, GLsizei height)
-  : mAnimating(false)
-  , mWindowHeight(height)
-  , mWindowWidth(width) {
+    : mAnimating(false), mWindowHeight(height), mWindowWidth(width) {
 
   CInitOptions o;
   o.args = NULL;
@@ -77,13 +65,9 @@ Servo::Servo(GLsizei width, GLsizei height)
   init_with_egl(o, &wakeup, c);
 }
 
-Servo::~Servo() {
-  deinit();
-}
+Servo::~Servo() { deinit(); }
 
-void Servo::PerformUpdates() {
-  perform_updates();
-}
+void Servo::PerformUpdates() { perform_updates(); }
 
 void Servo::SetSize(GLsizei width, GLsizei height) {
   if (width != mWindowWidth || height != mWindowHeight) {

@@ -11,66 +11,58 @@ using namespace winrt::Windows::UI::Xaml::Navigation;
 using namespace winrt::ServoApp;
 using namespace winrt::ServoApp::implementation;
 
-App::App()
-{
+App::App() {
   InitializeComponent();
-  Suspending({ this, &App::OnSuspending });
+  Suspending({this, &App::OnSuspending});
 
-#if defined _DEBUG && !defined DISABLE_XAML_GENERATED_BREAK_ON_UNHANDLED_EXCEPTION
-  UnhandledException([this](IInspectable const&, UnhandledExceptionEventArgs const& e)
-  {
-    if (IsDebuggerPresent())
-    {
-      auto errorMessage = e.Message();
-      __debugbreak();
-    }
-  });
+#if defined _DEBUG &&                                                          \
+    !defined DISABLE_XAML_GENERATED_BREAK_ON_UNHANDLED_EXCEPTION
+  UnhandledException(
+      [this](IInspectable const &, UnhandledExceptionEventArgs const &e) {
+        if (IsDebuggerPresent()) {
+          auto errorMessage = e.Message();
+          __debugbreak();
+        }
+      });
 #endif
 }
 
-void App::OnLaunched(LaunchActivatedEventArgs const& e)
-{
-  Frame rootFrame{ nullptr };
+void App::OnLaunched(LaunchActivatedEventArgs const &e) {
+  Frame rootFrame{nullptr};
   auto content = Window::Current().Content();
-  if (content)
-  {
+  if (content) {
     rootFrame = content.try_as<Frame>();
   }
 
-  if (rootFrame == nullptr)
-  {
+  if (rootFrame == nullptr) {
     rootFrame = Frame();
 
-    rootFrame.NavigationFailed({ this, &App::OnNavigationFailed });
+    rootFrame.NavigationFailed({this, &App::OnNavigationFailed});
 
-    if (e.PrelaunchActivated() == false)
-    {
-      if (rootFrame.Content() == nullptr)
-      {
-        rootFrame.Navigate(xaml_typename<ServoApp::BrowserPage>(), box_value(e.Arguments()));
+    if (e.PrelaunchActivated() == false) {
+      if (rootFrame.Content() == nullptr) {
+        rootFrame.Navigate(xaml_typename<ServoApp::BrowserPage>(),
+                           box_value(e.Arguments()));
       }
       Window::Current().Content(rootFrame);
       Window::Current().Activate();
     }
-  }
-  else
-  {
-    if (e.PrelaunchActivated() == false)
-    {
-      if (rootFrame.Content() == nullptr)
-      {
-        rootFrame.Navigate(xaml_typename<ServoApp::BrowserPage>(), box_value(e.Arguments()));
+  } else {
+    if (e.PrelaunchActivated() == false) {
+      if (rootFrame.Content() == nullptr) {
+        rootFrame.Navigate(xaml_typename<ServoApp::BrowserPage>(),
+                           box_value(e.Arguments()));
       }
       Window::Current().Activate();
     }
   }
 }
 
-void App::OnSuspending([[maybe_unused]] IInspectable const& sender, [[maybe_unused]] SuspendingEventArgs const& e)
-{
-}
+void App::OnSuspending([[maybe_unused]] IInspectable const &sender,
+                       [[maybe_unused]] SuspendingEventArgs const &e) {}
 
-void App::OnNavigationFailed(IInspectable const&, NavigationFailedEventArgs const& e)
-{
-  throw hresult_error(E_FAIL, hstring(L"Failed to load Page ") + e.SourcePageType().Name);
+void App::OnNavigationFailed(IInspectable const &,
+                             NavigationFailedEventArgs const &e) {
+  throw hresult_error(E_FAIL, hstring(L"Failed to load Page ") +
+                                  e.SourcePageType().Name);
 }

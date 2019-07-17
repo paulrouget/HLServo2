@@ -9,10 +9,12 @@ public:
   OpenGLES();
   ~OpenGLES();
 
-  EGLSurface CreateSurface(winrt::Windows::UI::Xaml::Controls::SwapChainPanel const&);
-  EGLSurface CreateSurface(winrt::Windows::UI::Core::CoreWindow const&);
+  EGLSurface
+  CreateSurface(winrt::Windows::UI::Xaml::Controls::SwapChainPanel const &);
+  EGLSurface CreateSurface(winrt::Windows::UI::Core::CoreWindow const &);
 
-  void GetSurfaceDimensions(const EGLSurface surface, EGLint* width, EGLint* height);
+  void GetSurfaceDimensions(const EGLSurface surface, EGLint *width,
+                            EGLint *height);
   void DestroySurface(const EGLSurface surface);
   void MakeCurrent(const EGLSurface surface);
   EGLBoolean SwapBuffers(const EGLSurface surface);
