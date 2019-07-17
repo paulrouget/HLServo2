@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "BrowserPage.g.h"
+#include "ImmersiveView.h"
 #include "OpenGLES.h"
 #include "Servo.h"
 
@@ -26,6 +27,8 @@ namespace winrt::ServoApp::implementation
 
     Concurrency::cancellation_token_source mLoopCancel;
     std::optional<Concurrency::task<void>> mLoopTask{};
+
+    winrt::ServoApp::ImmersiveViewSource mImmersiveViewSource;
 
     EGLSurface mRenderSurface{ EGL_NO_SURFACE };
     Servo* mServo;

@@ -47,11 +47,10 @@ namespace winrt::ServoApp::implementation
     if (HolographicSpace::IsAvailable())
     {
       log("Holographic space available");
-      auto v = winrt::Windows::ApplicationModel::Core::CoreApplication::CreateNewView(ServoApp::ImmersiveViewSource());
+      auto v = winrt::Windows::ApplicationModel::Core::CoreApplication::CreateNewView(mImmersiveViewSource);
       int parentId = ApplicationView::GetForCurrentView().Id();
-      v.Dispatcher().RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, [parentId]() {
+      v.Dispatcher().RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, [=]() {
         int winId = ApplicationView::GetForCurrentView().Id();
-        // FIXME: pick one
         // ApplicationViewSwitcher::TryShowAsStandaloneAsync(winId, ViewSizePreference::Default, parentId, ViewSizePreference::Default);
         ApplicationViewSwitcher::SwitchAsync(winId, parentId);
         // log("Immersive view started");

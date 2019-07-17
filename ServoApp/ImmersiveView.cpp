@@ -89,6 +89,9 @@ void ImmersiveView::Load(winrt::hstring const& entryPoint)
 // update, draw, and present loop, and it also oversees window message processing.
 void ImmersiveView::Run()
 {
+
+  CoreWindow::GetForCurrentThread().Activate();
+
   while (!m_windowClosed)
   {
     log("Meh: %s %s", m_windowVisible ? "T" : "F", (m_holographicSpace != nullptr) ? "T" : "F");
