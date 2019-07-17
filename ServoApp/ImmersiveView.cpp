@@ -81,7 +81,7 @@ void ImmersiveView::SetWindow(CoreWindow const& window)
 
 // The Load method can be used to initialize scene resources or to load a
 // previously saved app state.
-void ImmersiveView::Load(winrt::hstring const& entryPoint)
+void ImmersiveView::Load(winrt::hstring const&)
 {
 }
 
@@ -94,19 +94,17 @@ void ImmersiveView::Run()
 
   while (!m_windowClosed)
   {
-    log("Meh: %s %s", m_windowVisible ? "T" : "F", (m_holographicSpace != nullptr) ? "T" : "F");
-
     if (m_windowVisible && (m_holographicSpace != nullptr))
     {
       CoreWindow::GetForCurrentThread().Dispatcher().ProcessEvents(CoreProcessEventsOption::ProcessAllIfPresent);
 
-       HolographicFrame holographicFrame = m_main->Update();
+      HolographicFrame holographicFrame = m_main->Update();
 
       if (m_main->Render(holographicFrame))
       {
-          // The holographic frame has an API that presents the swap chain for each
-          // holographic camera.
-          m_deviceResources->Present(holographicFrame);
+        // The holographic frame has an API that presents the swap chain for each
+        // holographic camera.
+        m_deviceResources->Present(holographicFrame);
       }
     }
     else
@@ -149,13 +147,13 @@ void ImmersiveView::OnLaunched(LaunchActivatedEventArgs const& args)
 }
 
 // Called when the app view is activated. Activates the app's CoreWindow.
-void ImmersiveView::OnViewActivated(CoreApplicationView const& sender, IActivatedEventArgs const& args)
+void ImmersiveView::OnViewActivated(CoreApplicationView const& sender, IActivatedEventArgs const&)
 {
   // Run() won't start until the CoreWindow is activated.
   sender.CoreWindow().Activate();
 }
 
-void ImmersiveView::OnSuspending(winrt::Windows::Foundation::IInspectable const& sender, SuspendingEventArgs const& args)
+void ImmersiveView::OnSuspending(winrt::Windows::Foundation::IInspectable const&, SuspendingEventArgs const& args)
 {
   // Save app state asynchronously after requesting a deferral. Holding a deferral
   // indicates that the application is busy performing suspending operations. Be
@@ -169,7 +167,7 @@ void ImmersiveView::OnSuspending(winrt::Windows::Foundation::IInspectable const&
 
     if (m_main != nullptr)
     {
-        m_main->SaveAppState();
+      m_main->SaveAppState();
     }
 
     //
@@ -180,15 +178,15 @@ void ImmersiveView::OnSuspending(winrt::Windows::Foundation::IInspectable const&
   });
 }
 
-void ImmersiveView::OnResuming(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::Foundation::IInspectable const& args)
+void ImmersiveView::OnResuming(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::Foundation::IInspectable const&)
 {
   // Restore any data or state that was unloaded on suspend. By default, data
   // and state are persisted when resuming from suspend. Note that this event
   // does not occur if the app was previously terminated.
 
-   if (m_main != nullptr)
+  if (m_main != nullptr)
   {
-      m_main->LoadAppState();
+    m_main->LoadAppState();
   }
 
   //
@@ -226,7 +224,7 @@ void ImmersiveView::OnPointerPressed(CoreWindow const& sender, PointerEventArgs 
   // Allow the user to interact with the holographic world using the mouse.
   if (m_main != nullptr)
   {
-      m_main->OnPointerPressed();
+    m_main->OnPointerPressed();
   }
 }
 
